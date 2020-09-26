@@ -1,0 +1,13 @@
+#nav-link {
+  color: indigo;
+  padding: 5px;
+}
+
+#button {
+  background-color: indigo;
+}
+
+#quiz-timer {
+  color: black;
+  font-weight: 700;
+}
