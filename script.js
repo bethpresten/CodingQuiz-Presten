@@ -1,18 +1,22 @@
 // console.log("Connection is working!")
-var welcomeContainer = document.getElementById("welcome");
-var startButton = document.getElementById("start-quiz");
-var quiz = document.createElement("quiz");
-var options = document.getElementById("options");
-var quizTimer = document.getElementById("quiz-timer")
+var welcomeContainer = document.getElementById("welcome-container");
+var quizButton = document.getElementById("start-quiz");
+var answerContainer = document.getElementById("answer-container");
+var questionContainer = document.getElementById("question-container");
+
+
+// var timerDisplay = document.createElement("quiz-timer")
 
 var currentQuestion = 0;
+
+var renderQuestionBank = 0;
 
 var questionBank = [
     {
         question: "Commonly used data types DO NOT include:",
         choices: ["strings", "booleans", "alerts", "numbers"],
         answer: "alerts",
-    }
+    },
     {
         question: "The condition in an if / else statement is enclosed within ________.",
         choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
@@ -34,28 +38,47 @@ var questionBank = [
         answer: "console log",
     },
 ]
-startButton.addEventListener("click", function () {
-    // console.log(startButton);
+
+quizButton.addEventListener("click", function () {
+    console.log(quizButton, "You clicked!");
     welcomeContainer.style.display = "none";
-    var optionsToDisplay = questions[currentQuestion].options;
-    renderQuestionBank(questionToDisplay);
-});
+    // var question = questionBank.array(indexOf(question))
+    // var questionToDisplay = question[currentQuestion].answer;
+    // renderQuestionBank(questionToDisplay);
+})
 
-function renderQuiz() {
-    for (var i = 0; Array.length[i]; i++) {
+// function renderQuestionBank() {
+//     for (var i = 0; question.length[i]; i++) {
+//         var question = questionBank(indexOf[i]);
+//         var choiceButtons = document.createElement("button");
+//         choiceButton.setAttribute("style", "background-color: indigo");
+//         choiceButtons.textContent = choices[i];
+//         button.setAttribute("correct-answer"), array[i];
+//         choices.append(button);
+//     }
 
-    }
-}
 
-function quizTimer() {
-    timerSeconds = 30;
-    var interval = setInterval(function () {
-        timerSeconds--;
-        timerDisplay.textContent = "Time: " + timerSeconds;
 
-        if (timerSeconds === 0) {
-            clearInterval(interval);
-            var timesUp = timerDisplay("Time's Up!")
-        }
-    }, 1000);
-}
+//     answers.addEventListener("click", function (event) {
+//         if (event.target.matches("answer"){
+//             var correctAnswer = event.target.getAttribute("correct-answer");
+
+
+
+//         }
+//     }
+//     });
+
+
+    // function quizTimer() {
+    //     timerSeconds = 30;
+    //     var interval = setInterval(function () {
+    //         timerSeconds--;
+    //         timerDisplay.textContent = "Time: " + timerSeconds;
+
+    //         if (timerSeconds === 0) {
+    //             clearInterval(interval);
+    //             var timesUp = timerDisplay("Time's Up!")
+    //         }
+    //     }, 1000);
+    // }
