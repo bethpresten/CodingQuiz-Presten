@@ -11,3 +11,8 @@
   color: black;
   font-weight: 700;
 }
+
+.row {
+  margin: 20px;
+  padding: 10px;
+}

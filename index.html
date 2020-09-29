@@ -18,24 +18,23 @@
     <nav class="navbar navbar-expand-sm navbar-light bg-light">
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a href="./highscores.html" id="nav-link">View High Scores</a>
-              <!-- <button id="nav-link" href="./highscores.html">High Scores </button> -->
-            </li>
+          <li class="nav-item active">
+            <a href="./highscores.html" id="nav-link">View High Scores</a>
+            <!-- <button id="nav-link" href="./highscores.html">High Scores </button> -->
+          </li>
         </ul>
       </div>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
           <li>
             <a
-            data-toggle="collapse"
+              data-toggle="collapse"
               class="timer"
               tabindex="-1"
               aria-disabled="true"
               id="quiz-timer"
-              >Time: </a
-            >
+              >Time:
+            </a>
           </li>
         </ul>
       </div>
@@ -45,20 +44,31 @@
         <div class="col-sm-12 text-center" id="welcome-container">
           <h1>Coding Quiz Challenge</h1>
           <h4>
-            Try to answer the following code-related questions within the time limit.  Keep in mind that incorrect answers will penalize your score/time by ten seconds!
+            Try to answer the following code-related questions within the time
+            limit. Keep in mind that incorrect answers will penalize your
+            score/time by ten seconds!
           </h4>
-          <button type="button" class="btn btn-primary" id="start-quiz">Start Quiz</button>
+          <button type="button" class="btn btn-primary" id="start-quiz">
+            Start Quiz
+          </button>
           <div class="col-sm-2"></div>
-          </div>
-        </div>
-      </div>
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-4" id="question-container"></div>
-          <div class="col-sm-8" id="answer-container"></div>
         </div>
       </div>
     </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 text-center" id="question-container"></div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-4 text-left" id="answer-container"></div>
+        <div class="col-sm-5"></div>
+      </div>
+      <!-- <div class="row">
+          <div class="col-sm-12 text-center" id="graded-answer"></div> -->
+      <!-- </div> -->
+    </div>
+
     <script src="./script.js"></script>
   </body>
 </html>
