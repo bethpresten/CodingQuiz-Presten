@@ -1,4 +1,4 @@
-//pulling in variables from html
+//pulling in variables from index.html
 // console.log("Connection is working!")
 var welcomeContainer = document.getElementById("welcome-container");
 var quizButton = document.getElementById("start-quiz");
@@ -6,10 +6,16 @@ var answerContainer = document.getElementById("answer-container");
 var questionContainer = document.getElementById("question-container");
 var timerEl = document.getElementById("quiz-timer");
 
+
+
+//beginning at question #1
 var questionIndex = 0;
 
-//javascript variables
+//timer variables
+var secondsLeft = 75;
+var penalty = 15;
 
+//question bank questions and answers inserted into an array of objects
 var quizBank = [
     {
         question: "Commonly used data types DO NOT include:",
@@ -37,7 +43,10 @@ var quizBank = [
         answer: "4. console log",
     },
 ]
+//defining the final question
+var finalQuestion = quizBank[4];
 
+//calling the function to populate the questions
 function renderQuizBank() {
     questionContainer.innerHTML = "";
     var question = document.createElement("h2");
@@ -48,19 +57,21 @@ function renderQuizBank() {
     renderChoices();
 }
 
+//calling the function to populate the answers
 function renderChoices() {
     // console.log(choices);
     //empty the former answers out of the container and re-populate with the next answer set
     answerContainer.innerHTML = "";
     for (var i = 0; i < quizBank[questionIndex].choices.length; i++) {
         var choiceButtons = document.createElement("button");
-        choiceButtons.setAttribute("style", "background-color: indigo; color: white; margin: 5px");
+        choiceButtons.setAttribute("style", "display:block; background-color: indigo; color: white; margin: 5px");
         choiceButtons.setAttribute("data-value", quizBank[questionIndex].choices[i]);
         choiceButtons.textContent = quizBank[questionIndex].choices[i];
         answerContainer.append(choiceButtons);
     }
 }
 
+//calling the function to recognize the correct answer
 answerContainer.addEventListener("click", function (event) {
     var element = event.target;
     // console.log(element);
@@ -69,7 +80,7 @@ answerContainer.addEventListener("click", function (event) {
     if (element.matches("button") === true) {
         var answer = element.getAttribute("data-value");
         var createDiv = document.createElement("div");
-        createDiv.innerHTML = "";
+        createDiv.innerHTML = " ";
 
         if (answer === correctAnswer) {
             // console.log(answer);
@@ -78,26 +89,21 @@ answerContainer.addEventListener("click", function (event) {
             renderQuizBank();
         } else {
             createDiv.textContent.innerHTML = "Incorrect!";
+            // take 15 seconds off of running time
+            secondsLeft = secondsLeft - penalty;
             questionIndex++;
             renderQuizBank();
-
-            // take 15 seconds off of timer
-
         }
     }
     // console.log(quizBank[questionIndex].correctAnswer);
 
 });
 
-
-
-
-
+// giving the START QUIZ BUTTON FUNCTIONALITY:  starting the quiz as well as clearing the welcome and starting the timer
 quizButton.addEventListener("click", function () {
     // console.log(quizButton, "You clicked!");
     welcomeContainer.style.display = "none";
     questionContainer.setAttribute("style", "display:block");
-    var secondsLeft = 75;
 
     // timer element
     function setTime() {
@@ -106,6 +112,7 @@ quizButton.addEventListener("click", function () {
             timerEl.textContent = secondsLeft;
             if (secondsLeft === 0) {
                 clearInterval(timerInterval);
+                showGrade();
             }
         }, 1000);
     }
