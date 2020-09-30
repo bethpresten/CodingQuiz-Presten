@@ -6,6 +6,9 @@ var answerContainer = document.getElementById("answer-container");
 var questionContainer = document.getElementById("question-container");
 var timerEl = document.getElementById("quiz-timer");
 var feedbackEl = document.getElementById("feedback");
+var scoreContainer = document.getElementById("score-container");
+var showFinalScore = document.getElementById("show-score");
+var initialInput = document.getElementById("initial-input");
 
 //beginning at question #1
 var questionIndex = 0;
@@ -84,16 +87,12 @@ answerContainer.addEventListener("click", function (event) {
         if (answer === correctAnswer) {
             // console.log(answer);
             feedbackEl.textContent = "Correct!"
-            questionIndex++;
-            renderQuizBank();
-            renderChoices();
+
         } else {
             // take 15 seconds off of running time
             secondsLeft = secondsLeft - penalty;
             feedbackEl.textContent = "Incorrect!"
-            questionIndex++;
-            renderQuizBank();
-            renderChoices();
+
         }
     }
     // console.log(quizBank[questionIndex].correctAnswer);
@@ -104,29 +103,23 @@ function gradeAnswer() {
     feedbackEl.setAttribute("class", "feedback");
     // var currentQuestion = quizBank[questionIndex].answer;
     if (this.value !== quizBank[questionIndex].answer) {
-        feedbackEl.textContent = "Incorrect";
-        questionIndex++;
-    }
-    if (secondsLeft < 0) {
+    } if (secondsLeft < 0) {
         secondsLeft = 0;
-    }
-
-    // timerEl.textContent = secondsLeft;
-    else {
-        feedbackEl.textContent = "Correct!";
+    } else {
         questionIndex++;
     }
 
     setTimeout(function () {
+        feedbackEl.style.display = "none";
         feedbackEl.setAttribute("class", "feedback hide");
     }, 1000);
 
-    questionIndex++;
     if (questionIndex === quizBank.question.length) {
         quit();
+        stopQuizTimer();
+        displayQuizBank();
     } else {
         renderQuizBank();
-        renderChoices();
     }
 }
 
@@ -149,9 +142,27 @@ quizButton.addEventListener("click", function () {
 
             if (secondsLeft === 0) {
                 clearInterval(timerInterval);
-                showGrade();
+                showScore();
             }
         }, 1000);
     }
     renderQuizBank();
 });
+
+
+// function showScore() {
+//     scoreContainer.style.display = "none";
+//     scoreContainer.innerHTML = "";
+//     clearInterval(timerInterval);
+//     initialInput.value = "";
+//     showFinalScore.textContent = "All done!"
+//     showFinalScore.innerHTML = "Your score is " + secondsLeft!
+//     var submitScoreBtn = scoreContainer.createElement("button");
+//     submitScoreBtn.setAttribute("style", "display:block; background-color: indigo; color: white; margin: 5px");
+//     submitScoreBtn.setAttribute("src", "/.highscores.html")
+//     submitScoreBtn.textContent = "Submit Score"
+//     scoreContainer.append("button");
+// }
+
+
+
