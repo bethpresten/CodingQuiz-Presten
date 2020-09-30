@@ -158,10 +158,13 @@ quizButton.addEventListener("click", function () {
 //     showFinalScore.textContent = "All done!"
 //     showFinalScore.innerHTML = "Your score is " + secondsLeft!
 //     var submitScoreBtn = scoreContainer.createElement("button");
+//     var inputBox = document.createElement("input")
+//     inputBox = setAttribute("text", "enter initials here");
+//     initialInput.append("input")
 //     submitScoreBtn.setAttribute("style", "display:block; background-color: indigo; color: white; margin: 5px");
 //     submitScoreBtn.setAttribute("src", "/.highscores.html")
-//     submitScoreBtn.textContent = "Submit Score"
-//     scoreContainer.append("button");
+//     submitScoreBtn.innerHTML = "Submit Score"
+//     initialInput.append("button");
 // }
 
 
