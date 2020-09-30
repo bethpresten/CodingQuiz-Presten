@@ -5,8 +5,7 @@ var quizButton = document.getElementById("start-quiz");
 var answerContainer = document.getElementById("answer-container");
 var questionContainer = document.getElementById("question-container");
 var timerEl = document.getElementById("quiz-timer");
-
-
+var feedbackEl = document.getElementById("feedback");
 
 //beginning at question #1
 var questionIndex = 0;
@@ -81,16 +80,19 @@ answerContainer.addEventListener("click", function (event) {
         var answer = element.getAttribute("data-value");
         var createDiv = document.createElement("div");
         createDiv.innerHTML = " ";
+        gradeAnswer();
 
         if (answer === correctAnswer) {
             // console.log(answer);
-            createDiv.textContent.innerHTML = "Correct!";
+            // createDiv.textContent.innerHTML = "Correct!";
+            gradeAnswer();
             questionIndex++;
             renderQuizBank();
         } else {
-            createDiv.textContent.innerHTML = "Incorrect!";
+            // createDiv.textContent.innerHTML = "Incorrect!";
             // take 15 seconds off of running time
             secondsLeft = secondsLeft - penalty;
+            gradeAnswer();
             questionIndex++;
             renderQuizBank();
         }
@@ -99,30 +101,57 @@ answerContainer.addEventListener("click", function (event) {
 
 });
 
+function gradeAnswer() {
+    feedbackEl.setAttribute("class", "feedback");
+    var currentQuestion = quizBank[questionIndex].answer;
+    if (this.value !== currentQuestion.answer) {
+        feedbackEl.textContent = "Incorrect";
+        questionIndex++;
+    }
+    if (secondsLeft < 0) {
+        secondsLeft = 0;
+    }
+
+    // timerEl.textContent = secondsLeft;
+    else {
+        feedbackEl.textContent = "Correct!";
+        questionIndex++;
+    }
+
+    setTimeout(function () {
+        feedbackEl.setAttribute("class", "feedback hide");
+    }, 1000);
+
+    questionIndex++;
+    if (questionIndex === question.length) {
+        quit();
+    } else {
+        renderQuizBank();
+    }
+}
+
+window.onload = function () {
+    timerEl.textContent = "Time: 0"
+}
+
 // giving the START QUIZ BUTTON FUNCTIONALITY:  starting the quiz as well as clearing the welcome and starting the timer
 quizButton.addEventListener("click", function () {
     // console.log(quizButton, "You clicked!");
     welcomeContainer.style.display = "none";
     questionContainer.setAttribute("style", "display:block");
-
+    setTime();
     // timer element
     function setTime() {
         var timerInterval = setInterval(function () {
             secondsLeft--;
-            timerEl.textContent = secondsLeft;
+
+            timerEl.textContent = "Time: " + secondsLeft;
+
             if (secondsLeft === 0) {
                 clearInterval(timerInterval);
                 showGrade();
             }
         }, 1000);
     }
-    setTime();
-
-    // timerEl.append(textContent)
-    // startQuiz();
     renderQuizBank();
-
 });
-
-
-
