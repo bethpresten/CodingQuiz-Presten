@@ -1,19 +1,22 @@
 # CodingQuiz-Presten
 
-<!-- GIVEN I am taking a code quiz
-WHEN I click the start button
+Description
 
+The purpose was to have a timed quiz assessments that has the following capabilities:
 
+1.  Several multiple choice questions.
+2.  The ability to recognize if the button clicked was the correct answer.
+3.  A penalty of 15 seconds for an incorrect answer.
+4.  Submitting a final score and the ability to utilize local storage.
 
-THEN a timer starts and I am presented with a question
+Challenges
 
+This was the most challenging homework assignment by far. I triaged the importance of the problems as following:
 
-
-WHEN I answer a question
-THEN I am presented with another question
-WHEN I answer a question incorrectly
-THEN time is subtracted from the clock
-WHEN all questions are answered or the timer reaches 0
-THEN the game is over
-WHEN the game is over
-THEN I can save my initials and score -->
+1. Welcome Screen with the start quiz button.
+2. Populating the questions and answers.
+3. Utilizing a countdown timer function.
+4. Giving the user feedback on if the answer was correct versus incorrect.
+5. Creating the final page with the initials and submit button.
+6. Populating all the high scores within local storage.
+7. Final styling of the page.

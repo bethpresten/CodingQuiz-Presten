@@ -42,17 +42,17 @@ var quizBank = [
         answer: "4. console log",
     },
 ]
-//defining the final question
-var finalQuestion = quizBank[4];
+
 
 //calling the function to populate the questions
 function renderQuizBank() {
     questionContainer.innerHTML = "";
-    var question = document.createElement("h2");
-    question.textContent = quizBank[questionIndex].question;
+    var question = document.createElement("h1");
+    question = quizBank[questionIndex].question;
+    question.textContent = quizBank.question;
     // questions now need to go in questionContainer
     // console.log(quizBank[questionIndex].question);
-    questionContainer.append(question)
+    questionContainer.append(question);
     renderChoices();
 }
 
@@ -78,23 +78,22 @@ answerContainer.addEventListener("click", function (event) {
     // If that element is a button...
     if (element.matches("button") === true) {
         var answer = element.getAttribute("data-value");
-        var createDiv = document.createElement("div");
-        createDiv.innerHTML = " ";
-        gradeAnswer();
+        questionIndex++;
+        renderQuizBank();
 
         if (answer === correctAnswer) {
             // console.log(answer);
-            // createDiv.textContent.innerHTML = "Correct!";
-            gradeAnswer();
+            feedbackEl.textContent = "Correct!"
             questionIndex++;
             renderQuizBank();
+            renderChoices();
         } else {
-            // createDiv.textContent.innerHTML = "Incorrect!";
             // take 15 seconds off of running time
             secondsLeft = secondsLeft - penalty;
-            gradeAnswer();
+            feedbackEl.textContent = "Incorrect!"
             questionIndex++;
             renderQuizBank();
+            renderChoices();
         }
     }
     // console.log(quizBank[questionIndex].correctAnswer);
@@ -103,8 +102,8 @@ answerContainer.addEventListener("click", function (event) {
 
 function gradeAnswer() {
     feedbackEl.setAttribute("class", "feedback");
-    var currentQuestion = quizBank[questionIndex].answer;
-    if (this.value !== currentQuestion.answer) {
+    // var currentQuestion = quizBank[questionIndex].answer;
+    if (this.value !== quizBank[questionIndex].answer) {
         feedbackEl.textContent = "Incorrect";
         questionIndex++;
     }
@@ -123,10 +122,11 @@ function gradeAnswer() {
     }, 1000);
 
     questionIndex++;
-    if (questionIndex === question.length) {
+    if (questionIndex === quizBank.question.length) {
         quit();
     } else {
         renderQuizBank();
+        renderChoices();
     }
 }
 

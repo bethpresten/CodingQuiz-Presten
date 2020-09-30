@@ -13,3 +13,6 @@ if (event.target.matches("button")) {
     item.textContent = groceries[event.target.parentElement.id];
     shoppingCartEl.append(item);
 }
+
+
+window.location.href = './highscores.html'
