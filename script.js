@@ -77,6 +77,7 @@ answerContainer.addEventListener("click", function (event) {
     var element = event.target;
     // console.log(element);
     var correctAnswer = quizBank[questionIndex].answer;
+    var finalQuestion = quizBank[questionIndex].length;
     // If that element is a button...
     if (element.matches("button") === true) {
         var answer = element.getAttribute("data-value");
@@ -87,11 +88,12 @@ answerContainer.addEventListener("click", function (event) {
             // console.log(answer);
             feedbackEl.textContent = "Correct!"
 
+        } if (questionIndex === finalQuestion) {
+            quit();
+            stopQuizTimer();
+            // displayQuizBank();
         }
-        //attempted to try to define the last question; but it broke code at second question; gave error message on link 79 of answer is undefined
-        // if (questionIndex = quizBank[-1]) {
-        //     showScoreEl();
-        // }
+
     }
     else {
         // take 15 seconds off of running time
@@ -103,30 +105,27 @@ answerContainer.addEventListener("click", function (event) {
 // console.log(quizBank[questionIndex].correctAnswer);
 
 
+//function created that confused the code
+// function gradeAnswer() {
+//     feedbackEl.setAttribute("class", "feedback");
+//     // var currentQuestion = quizBank[questionIndex].answer;
+//     if (this.value !== quizBank[questionIndex].answer) {
+//     } if (secondsLeft < 0) {
+//         secondsLeft = 0;
+//     }
 
-function gradeAnswer() {
-    feedbackEl.setAttribute("class", "feedback");
-    // var currentQuestion = quizBank[questionIndex].answer;
-    if (this.value !== quizBank[questionIndex].answer) {
-    } if (secondsLeft < 0) {
-        secondsLeft = 0;
-    } else {
-        questionIndex++;
-    }
+//     setTimeout(function () {
+//         feedbackEl.style.display = "none";
+//         feedbackEl.setAttribute("class", "feedback hide");
+//     }, 1000);
 
-    setTimeout(function () {
-        feedbackEl.style.display = "none";
-        feedbackEl.setAttribute("class", "feedback hide");
-    }, 1000);
-
-    if (questionIndex === quizBank.question.length) {
-        quit();
-        stopQuizTimer();
-        displayQuizBank();
-    } else {
-        renderQuizBank();
-    }
-}
+//     if (questionIndex === quizBank.length) {
+//         quit();
+//         // stopQuizTimer();
+//     } else {
+//         renderQuizBank();
+//     }
+// }
 
 window.onload = function () {
     timerEl.textContent = "Time: 0"
