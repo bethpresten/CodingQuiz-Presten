@@ -6,9 +6,7 @@ var answerContainer = document.getElementById("answer-container");
 var questionContainer = document.getElementById("question-container");
 var timerEl = document.getElementById("quiz-timer");
 var feedbackEl = document.getElementById("feedback");
-var scoreContainer = document.getElementById("score-container");
-var showFinalScore = document.getElementById("show-score");
-var initialInput = document.getElementById("initial-input");
+var showScoreEl = document.getElementById("show-score");
 
 //beginning at question #1
 var questionIndex = 0;
@@ -16,6 +14,7 @@ var questionIndex = 0;
 //timer variables
 var secondsLeft = 75;
 var penalty = 15;
+var timerInterval;
 
 //question bank questions and answers inserted into an array of objects
 var quizBank = [
@@ -88,16 +87,22 @@ answerContainer.addEventListener("click", function (event) {
             // console.log(answer);
             feedbackEl.textContent = "Correct!"
 
-        } else {
-            // take 15 seconds off of running time
-            secondsLeft = secondsLeft - penalty;
-            feedbackEl.textContent = "Incorrect!"
-
         }
+        //attempted to try to define the last question; but it broke code at second question; gave error message on link 79 of answer is undefined
+        // if (questionIndex = quizBank[-1]) {
+        //     showScoreEl();
+        // }
     }
-    // console.log(quizBank[questionIndex].correctAnswer);
+    else {
+        // take 15 seconds off of running time
+        secondsLeft = secondsLeft - penalty;
+        feedbackEl.textContent = "Incorrect!"
 
-});
+    }
+})
+// console.log(quizBank[questionIndex].correctAnswer);
+
+
 
 function gradeAnswer() {
     feedbackEl.setAttribute("class", "feedback");
@@ -142,30 +147,17 @@ quizButton.addEventListener("click", function () {
 
             if (secondsLeft === 0) {
                 clearInterval(timerInterval);
-                showScore();
+                // showScore();
             }
         }, 1000);
     }
     renderQuizBank();
 });
 
-
-// function showScore() {
-//     scoreContainer.style.display = "none";
-//     scoreContainer.innerHTML = "";
-//     clearInterval(timerInterval);
-//     initialInput.value = "";
-//     showFinalScore.textContent = "All done!"
-//     showFinalScore.innerHTML = "Your score is " + secondsLeft!
-//     var submitScoreBtn = scoreContainer.createElement("button");
-//     var inputBox = document.createElement("input")
-//     inputBox = setAttribute("text", "enter initials here");
-//     initialInput.append("input")
-//     submitScoreBtn.setAttribute("style", "display:block; background-color: indigo; color: white; margin: 5px");
-//     submitScoreBtn.setAttribute("src", "/.highscores.html")
-//     submitScoreBtn.innerHTML = "Submit Score"
-//     initialInput.append("button");
-// }
-
-
-
+//End game and save score
+function quit() {
+    var completeEl = document.getElementById("complete-message");
+    completeEl.textContent = "All Done!";
+    answerContainer.textContent = "Your final score is " + secondsLeft;
+    endScreenEl.classList.remove("hide");
+}
