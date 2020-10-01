@@ -6,6 +6,7 @@ var answerContainer = document.getElementById("answer-container");
 var questionContainer = document.getElementById("question-container");
 var timerEl = document.getElementById("quiz-timer");
 var feedbackEl = document.getElementById("feedback");
+var submitScoreButton = document.createElement("button");
 
 //beginning at question #1
 var questionIndex = 0;
@@ -47,14 +48,18 @@ var quizBank = [
 
 //calling the function to populate the questions
 function renderQuizBank() {
-    questionContainer.innerHTML = "";
-    var question = document.createElement("h1");
-    question = quizBank[questionIndex].question;
-    question.textContent = quizBank.question;
-    // questions now need to go in questionContainer
-    // console.log(quizBank[questionIndex].question);
-    questionContainer.append(question);
-    renderChoices();
+    if (questionIndex === quizBank.length) {
+        endQuiz();
+    } else {
+        questionContainer.innerHTML = "";
+        var question = document.createElement("h1");
+        question = quizBank[questionIndex].question;
+        question.textContent = quizBank.question;
+        // questions now need to go in questionContainer
+        // console.log(quizBank[questionIndex].question);
+        questionContainer.append(question);
+        renderChoices();
+    }
 }
 
 //calling the function to populate the answers
@@ -93,9 +98,9 @@ answerContainer.addEventListener("click", function (event) {
             feedbackEl.textContent = "Incorrect!"
             secondsLeft = secondsLeft - penalty;
         }
-        if (questionIndex === quizBank.length && questionIndex === quizBank.choices.length) {
-            quit();
-            stopQuizTimer();
+        if (questionIndex === quizBank.length) {
+            endQuiz();
+            clearInterval(interval);
         }
     }
 })
@@ -120,7 +125,7 @@ quizButton.addEventListener("click", function () {
     setTime();
     // timer element
     function setTime() {
-        var timerInterval = setInterval(function () {
+        timerInterval = setInterval(function () {
             secondsLeft--;
 
             timerEl.textContent = "Time: " + secondsLeft;
@@ -140,20 +145,25 @@ quizButton.addEventListener("click", function () {
 // }
 
 //End game and save score
-function quit() {
-    stopQuizTimer();
-    questionContainer.innerHTML = "none";
-    answerContainer.innerHTML = "none";
+function endQuiz() {
+    // stopQuizTimer();
+    questionContainer.innerHTML = "";
+    answerContainer.innerHTML = "";
+    feedbackEl.innerHTML = "";
     var allDoneEl = document.getElementById("all-done");
-    answerContainer.textContent = "none";
-    allDoneEl.textContent = "All done!";
-    answerContainer.textContent = "Your final score is " + secondsLeft;
-    var initialInput = document.createElement("input");
-    initialInput.setAttribute("text", "type");
-    answerContainer.append(initialInput);
-    var submitScoreButton = document.createElement("button");
+    allDoneEl.setAttribute("style", "font-size: 30px");
+    allDoneEl.textContent = "All done!"
+    var showScoreEl = document.getElementById("show-score");
+    var initialInput = document.getElementById("hide");
+    initialInput.removeAttribute("id");
+    initialInput = ("style", "display:block");
+    showScoreEl.textContent = "Your final score is " + secondsLeft;
     submitScoreButton.textContent = "Submit Score";
     submitScoreButton.setAttribute("style", "display:block; background-color: indigo; color: white; margin: 5px");
-    answerContainer.append(submitScoreButton);
+    showScoreEl.append(submitScoreButton);
 }
+
+submitScoreButton.addEventListener("click", function () {
+    window.location.replace("./highscores.html");
+});
 

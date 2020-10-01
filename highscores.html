@@ -17,19 +17,17 @@
       integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="" />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- high score display section -->
     <div class="container" id="score-html">
       <div class="row">
-        <div class="col-sm-8" id="complete-message"><h2>ALL DONE!</h2></div>
-      </div>
-      <div class="row">
-        <div class="col-sm-8" id="show-score"></div>
-      </div>
-      <div class="row">
-        <div class="col-sm-8" id="initial-input-form">
-          <label id="initials-input"></label>
+        <div class="col-sm-8" id="complete-message"><h2>High Scores</h2></div>
+        <ol id="highscores"></ol>
+        <div class="row">
+          <a href=".index.html"><button id="return">Play Again</button></a>
+          <button id="clear-button">Clear High Scores</button>
         </div>
       </div>
     </div>

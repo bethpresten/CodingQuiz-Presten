@@ -1,11 +1,11 @@
-// console.log("Testing connection!")
-var registerScore = document.getElementById("high-scores");
-var showScore = document.getElementById("show-scores");
-var submitScoreButton = document.getElementById("submit-score-button");
+// // console.log("Testing connection!")
+// var registerScore = document.getElementById("high-scores");
+// var showScore = document.getElementById("show-scores");
+// var submitScoreButton = document.getElementById("submit-score-button");
 
-var inputName = document.createElement("input");
-inputName.setAttribute("type", "text");
-document.append(inputName)
+// var inputName = document.createElement("input");
+// inputName.setAttribute("type", "text");
+// document.append(inputName)
 
 // inputName.setAttribute("placeholder", "initial here");
 
