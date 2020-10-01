@@ -6,7 +6,6 @@ var answerContainer = document.getElementById("answer-container");
 var questionContainer = document.getElementById("question-container");
 var timerEl = document.getElementById("quiz-timer");
 var feedbackEl = document.getElementById("feedback");
-var showScoreEl = document.getElementById("show-score");
 
 //beginning at question #1
 var questionIndex = 0;
@@ -26,7 +25,7 @@ var quizBank = [
     {
         question: "The condition in an if / else statement is enclosed within ________.",
         choices: ["1. quotes", "2. curly brackets", "3. parentheses", "4. square brackets"],
-        answer: "2. curly brackets",
+        answer: "3. parentheses",
     },
     {
         question: "Arrays in JavaScript can be used to store _____.",
@@ -74,58 +73,40 @@ function renderChoices() {
 
 //calling the function to recognize the correct answer
 answerContainer.addEventListener("click", function (event) {
+    // feedbackEl.setAttribute(“class ”, “feedback”);
+    // feedbackEl.setAttribute(“style”, “margin: auto; width: 50 %“);
     var element = event.target;
-    // console.log(element);
     var correctAnswer = quizBank[questionIndex].answer;
-    var finalQuestion = quizBank[questionIndex].length;
     // If that element is a button...
     if (element.matches("button") === true) {
-        var answer = element.getAttribute("data-value");
+        console.log(element.getAttribute("data-value"));
+        // console.log(correctAnswer);
         questionIndex++;
         renderQuizBank();
 
-        if (answer === correctAnswer) {
-            // console.log(answer);
-            feedbackEl.textContent = "Correct!"
-
-        } if (questionIndex === finalQuestion) {
-            quit();
-            stopQuizTimer();
-            // displayQuizBank();
+        if (correctAnswer === element.getAttribute("data-value")) {
+            feedbackEl.textContent = "Correct!";
         }
 
-    }
-    else {
-        // take 15 seconds off of running time
-        secondsLeft = secondsLeft - penalty;
-        feedbackEl.textContent = "Incorrect!"
-
+        else {
+            // take 15 seconds off of running time
+            feedbackEl.textContent = "Incorrect!"
+            secondsLeft = secondsLeft - penalty;
+        }
+        if (questionIndex === quizBank.length && questionIndex === quizBank.choices.length) {
+            quit();
+            stopQuizTimer();
+        }
     }
 })
 // console.log(quizBank[questionIndex].correctAnswer);
-
-
-//function created that confused the code
-// function gradeAnswer() {
-//     feedbackEl.setAttribute("class", "feedback");
-//     // var currentQuestion = quizBank[questionIndex].answer;
-//     if (this.value !== quizBank[questionIndex].answer) {
-//     } if (secondsLeft < 0) {
-//         secondsLeft = 0;
-//     }
 
 //     setTimeout(function () {
 //         feedbackEl.style.display = "none";
 //         feedbackEl.setAttribute("class", "feedback hide");
 //     }, 1000);
 
-//     if (questionIndex === quizBank.length) {
-//         quit();
-//         // stopQuizTimer();
-//     } else {
-//         renderQuizBank();
-//     }
-// }
+
 
 window.onload = function () {
     timerEl.textContent = "Time: 0"
@@ -153,10 +134,26 @@ quizButton.addEventListener("click", function () {
     renderQuizBank();
 });
 
+// function stopQuizTimer() {
+//     clearInterval(holdInterval);
+//     var remainingTime = secondsLeft;
+// }
+
 //End game and save score
 function quit() {
-    var completeEl = document.getElementById("complete-message");
-    completeEl.textContent = "All Done!";
+    stopQuizTimer();
+    questionContainer.innerHTML = "none";
+    answerContainer.innerHTML = "none";
+    var allDoneEl = document.getElementById("all-done");
+    answerContainer.textContent = "none";
+    allDoneEl.textContent = "All done!";
     answerContainer.textContent = "Your final score is " + secondsLeft;
-    endScreenEl.classList.remove("hide");
+    var initialInput = document.createElement("input");
+    initialInput.setAttribute("text", "type");
+    answerContainer.append(initialInput);
+    var submitScoreButton = document.createElement("button");
+    submitScoreButton.textContent = "Submit Score";
+    submitScoreButton.setAttribute("style", "display:block; background-color: indigo; color: white; margin: 5px");
+    answerContainer.append(submitScoreButton);
 }
+

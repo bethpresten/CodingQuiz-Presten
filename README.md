@@ -1,5 +1,8 @@
 # CodingQuiz-Presten
 
+Project
+![Overview Picture](CodingQuiz.png)
+
 Description
 
 The purpose was to have a timed quiz assessments that has the following capabilities:
