@@ -165,5 +165,19 @@ function endQuiz() {
 
 submitScoreButton.addEventListener("click", function () {
     window.location.replace("./highscores.html");
-});
+    var initialInfo = document.getElementById("hide");
+})
+//     showScoreEl.push(initialObj);
+
+//     function saveScores() {
+//         var initials = initialInput.value.trim()
+//         var highScores = localStorage.getItem("highScores", JSON.parse(score));
+//     });
+// var initialObj {
+//     user: initials,
+//     score: secondsLeft;
+// }
+// highScores.push(newScore);
+// window.localStorage.setItem("highscores", JSON.strigify(score);
+// }
 
