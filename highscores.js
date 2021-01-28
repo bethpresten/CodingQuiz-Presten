@@ -1,3 +1,12 @@
+// get hi scores from local storage
+// opt: convert from json to js // JSON.parse()
+// display that crap on the page // few steps
+
+
+
+
+
+
 // // console.log("Testing connection!")
 // var registerScore = document.getElementById("high-scores");
 // var showScore = document.getElementById("show-scores");
@@ -52,3 +61,12 @@
 
 
 
+// JSON.parse(localStorage.getItem("hide", initials)
+// JSON.parse(localStorage.getItem(secondsLeft))
+
+// var highScores = document.getElementById("highscores");
+// var clearScoresBtn = document.getElementById("clear-button");
+// var playAgainBtn = document.getElementById("return");
+// var createScoreLi = document.createElement("li");
+
+// createScoreLi.textContent = allHighScores[i].initialInput;

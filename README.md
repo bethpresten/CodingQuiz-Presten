@@ -1,7 +1,7 @@
 # CodingQuiz-Presten
 
 Project
-![Overview Picture](CodingQuiz.png)
+![Overview Picture](Password-Generator.gif)
 
 Description
 

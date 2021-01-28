@@ -39,9 +39,9 @@
         </ul>
       </div>
     </nav>
-    <div class="container" id="welcome">
+    <div class="container" id="welcome-container">
       <div class="row">
-        <div class="col-sm-12 text-center" id="welcome-container">
+        <div class="col-sm-12 text-center">
           <h1>Coding Quiz Challenge</h1>
           <h4>
             Try to answer the following code-related questions within the time
@@ -55,6 +55,7 @@
         </div>
       </div>
     </div>
+    <!-- question and answer screen -->
     <div class="container">
       <div class="row">
         <div class="col-sm-12 text-center" id="question-container"></div>
@@ -74,20 +75,30 @@
         <div class="col-sm-3"></div>
       </div>
     </div>
-    <div class="container">
+    <!-- all done screen -->
+    <div class="container" id="hide">
       <div class="row">
-        <div class="col-sm-12" id="all-done" class="hide"></div>
+        <div class="col-sm-3"></div>
+        <div class="col-sm-9" id="all-done"></div>
       </div>
-      <div class="row" id="hide">
-        <div class="col-sm-12" id="initial-input-form">
-          <p>Enter initials: <input type="text" id="initials" max="3" /></p>
+      <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-9" id="input-box">
+          <p>
+            Enter initials:
+            <input type="text" id="initials" max="3" />
+          </p>
         </div>
-        <div class="row">
-          <div class="col-sm-12" id="show-score"></div>
-        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-9" id="show-score"></div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-9" class="hide" id="submit-score"></div>
       </div>
     </div>
-
     <script src="./script.js"></script>
   </body>
 </html>

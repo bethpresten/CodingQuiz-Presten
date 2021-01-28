@@ -53,6 +53,7 @@ function renderQuizBank() {
     } else {
         questionContainer.innerHTML = "";
         var question = document.createElement("h1");
+        question.setAttribute("style", "font-size: 24px; font-weight: bolder; margins: 20px; padding 20px 20px 20px 20px;")
         question = quizBank[questionIndex].question;
         question.textContent = quizBank.question;
         // questions now need to go in questionContainer
@@ -69,7 +70,7 @@ function renderChoices() {
     answerContainer.innerHTML = "";
     for (var i = 0; i < quizBank[questionIndex].choices.length; i++) {
         var choiceButtons = document.createElement("button");
-        choiceButtons.setAttribute("style", "display:block; background-color: indigo; color: white; margin: 5px");
+        choiceButtons.setAttribute("id", "answer-button");
         choiceButtons.setAttribute("data-value", quizBank[questionIndex].choices[i]);
         choiceButtons.textContent = quizBank[questionIndex].choices[i];
         answerContainer.append(choiceButtons);
@@ -78,8 +79,7 @@ function renderChoices() {
 
 //calling the function to recognize the correct answer
 answerContainer.addEventListener("click", function (event) {
-    // feedbackEl.setAttribute(“class ”, “feedback”);
-    // feedbackEl.setAttribute(“style”, “margin: auto; width: 50 %“);
+
     var element = event.target;
     var correctAnswer = quizBank[questionIndex].answer;
     // If that element is a button...
@@ -114,7 +114,7 @@ answerContainer.addEventListener("click", function (event) {
 
 
 window.onload = function () {
-    timerEl.textContent = "Time: 0"
+    timerEl.textContent = "Time: 75"
 }
 
 // giving the START QUIZ BUTTON FUNCTIONALITY:  starting the quiz as well as clearing the welcome and starting the timer
@@ -151,33 +151,73 @@ function endQuiz() {
     answerContainer.innerHTML = "";
     feedbackEl.innerHTML = "";
     var allDoneEl = document.getElementById("all-done");
+    allDoneEl.classList.remove("hide");
     allDoneEl.setAttribute("style", "font-size: 30px");
     allDoneEl.textContent = "All done!"
     var showScoreEl = document.getElementById("show-score");
-    var initialInput = document.getElementById("hide");
-    initialInput.removeAttribute("id");
+    var initialInput = document.getElementById("input-box");
+    initialInput.classList.remove("hide");
     initialInput = ("style", "display:block");
     showScoreEl.textContent = "Your final score is " + secondsLeft;
+
     submitScoreButton.textContent = "Submit Score";
     submitScoreButton.setAttribute("style", "display:block; background-color: indigo; color: white; margin: 5px");
     showScoreEl.append(submitScoreButton);
 }
 
 submitScoreButton.addEventListener("click", function () {
-    window.location.replace("./highscores.html");
-    var initialInfo = document.getElementById("hide");
-})
-//     showScoreEl.push(initialObj);
+    // get initials from html
+    var initials = document.getElementById("initials").value;
+    console.log(initials) // sanity check
 
-//     function saveScores() {
-//         var initials = initialInput.value.trim()
-//         var highScores = localStorage.getItem("highScores", JSON.parse(score));
-//     });
-// var initialObj {
-//     user: initials,
-//     score: secondsLeft;
-// }
-// highScores.push(newScore);
-// window.localStorage.setItem("highscores", JSON.strigify(score);
-// }
+    // get score from html
+    var scoreSentence = document.getElementById("show-score").firstChild.data;
+    var scoreString = scoreSentence.slice(-2);
+    var score = parseInt(scoreString);
+    console.log(score) // sanity check
+
+    // add your init and score to an hi score
+    var hiScore = {
+        initials: initials,
+        score: score
+    }
+
+    // ** store data into localstorage
+    // get localstorage
+    // parse it into js
+    // if localstorage is empty (null)
+    // -- create an empty array
+    // else (if its not empty(null))
+    // -- do nothing
+    // add your obj to that array
+    // convert that array to json
+    // push that array to localstorage
+
+
+
+    var hiScores = [
+        {
+            initials: "dada",
+            score: 14
+        },
+        {
+            initials: "dada",
+            score: 14
+        }
+    ]
+    // navigate to highscore.html
+    window.location.replace("./highscores.html");
+
+
+
+
+    JSON.stringify(localStorage.setItem("hide", initials))
+    JSON.stringify(localStorage.setItem("score", secondsLeft));
+})
+
+// clearScoresBtn.addEventListener("click", function () {
+//     localStorage.clear();
+//     location.reload();
+// })
+
 
